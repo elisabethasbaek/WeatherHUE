@@ -4,6 +4,10 @@
 /node_modules
 /.pnp
 .pnp.js
+.vscode
+.eslintcache
+README.md
+.env
 
 # testing
 /coverage
