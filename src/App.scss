@@ -1,29 +1,9 @@
 @import "./Variables.scss";
 
 .App{
-    background-color: $coldBackground;
+    background-color: transparent;
     width: 100vw;
     height: 100vh;
-}
-
-.city{
-    display: grid;
-    justify-content: center;
-
-    &__label{
-        grid-area: 1/1/2/3;
-        justify-self: center;
-    }
-
-    &__input{
-        grid-area: 2/1/3/3;
-
-        input{
-
-        }
-
-        button{
-
-        }
-    }
+    font-family: $mainFontStack;
+    color: $darkCold;
 }
