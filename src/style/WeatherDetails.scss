@@ -7,6 +7,31 @@
     border-bottom-right-radius: 3px;
     padding: 0.5rem;
     padding-left: 2rem;
+    padding-bottom: 1.5rem;
     box-shadow: 2px 2px 5px RGBA(0, 44, 43, 0.2);
     color: $cold;
+
+    &__temp{
+        text-align: end;
+        font-size: 1.8rem;
+        margin: 0;
+        padding: 1.5rem 1rem 0.5rem 0;
+        font-weight: bolder;
+    }
+
+    &__feelsLike{
+        span{
+            font-weight: bold;
+        }
+    }
+
+    &__weather{
+        text-transform: capitalize;
+    }
+    
+    &__feelsLike,
+    &__weather{
+        margin: 0;
+        padding: 0.3rem 0;
+    }
 }
