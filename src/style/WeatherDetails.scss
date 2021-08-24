@@ -1,0 +1,12 @@
+@import "../Variables.scss";
+
+.weatherDetails{
+    background-color: $coldBackgroundTransparent;
+    max-width: 80vw;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    padding: 0.5rem;
+    padding-left: 2rem;
+    box-shadow: 2px 2px 5px RGBA(0, 44, 43, 0.2);
+    color: $cold;
+}

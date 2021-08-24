@@ -4,12 +4,14 @@
     display: grid;
     justify-content: center;
     max-width: 100%;
+    background-image: linear-gradient(to bottom, RGBA(0, 44, 43, 0.2) 60%, transparent);
+    padding-bottom: 2rem;
 
     &__label{
         grid-area: 1/1/2/3;
         justify-self: center;
-        color: $darkCold;
-        padding-bottom: 0.5rem;
+        color: $cold;
+        padding: 1rem 0 0.5rem 0;
     }
 
     &__input{
@@ -18,7 +20,8 @@
         input{
             font-size: 1rem;
             border: none;
-            border-bottom: 2px solid $cold;
+            color: $cold;
+            border-bottom: 2px solid $lightCold;
             background-color: transparent;
             outline: none;
             padding-left: 0.5rem;
@@ -29,7 +32,7 @@
             font-size: 1rem;
             border: none;
             color: $coldBackground;
-            background-color: $cold;
+            background-color: $lightCold;
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
             padding: 3px 1rem;
