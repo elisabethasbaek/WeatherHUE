@@ -1,13 +1,17 @@
 import { useState } from "react";
 import axios from "axios";
+
 import "./App.scss";
 import "./style/Search.scss";
 import "./style/City.scss";
 import "./style/BackgroundImage.scss";
 import "./style/WeatherDetails.scss";
+import "./style/UnitsButtons.scss";
+import Result from "./pages/Result";
 
 export default function App() {
     var [content, setContent] = useState([]);
+    var backgroundImageSrc;
     
     function handleUnits(event){
         var cookieName = "units";
@@ -19,18 +23,30 @@ export default function App() {
         document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
         console.log(document.cookie);
     }
-
+    
     function handleSubmit(event){
         event.preventDefault();
         
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${event.target.search.value}&units=metric&appid=01ef0b0a8b733220771bbe668022c1b3`)
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${event.target.search.value}&units=${document.cookie.split("=")[1]}&appid=01ef0b0a8b733220771bbe668022c1b3`)
         .then(function (response) {
             setContent(response.data);
             console.log(response.data);
         });
     }
 
-    var backgroundImageSrc;
+    const setLight = async (hue, sat, bri) => {
+        try{
+            return await axios.put("https://192.168.8.100/api/0XBlGLtpVQGbYSpcweaVrbi7hNe1nGgkE5DENQ6I/lights/11/state", {
+                hue: parseInt(hue),
+                sat: parseInt(sat),
+                bri: parseInt(bri)
+            });
+            
+        } catch(err){
+            console.log(err);
+        }
+    }
+
     function cityColor(color){
         document.querySelector(".city").style.color = color;
     }
@@ -38,34 +54,42 @@ export default function App() {
     if(content.weather && (content.weather[0].id >= 200 && content.weather[0].id <= 299)){
         backgroundImageSrc = "./ThunderStorm.jpg";
         cityColor("#0A837F");
+        setLight(65600, 254, 180);
     }
     if(content.weather && (content.weather[0].id >= 300 && content.weather[0].id <= 499)){
         backgroundImageSrc = "./Drizzle.jpg";
         cityColor("#0A837F");
+        setLight(31000, 254, 80);
     }
     if(content.weather && (content.weather[0].id >= 500 && content.weather[0].id <= 599)){
         backgroundImageSrc = "./Rainy.jpg";
         cityColor("#0A837F");
+        setLight(47800, 254, 150);
     }
     if(content.weather && (content.weather[0].id >= 600 && content.weather[0].id <= 699)){
         backgroundImageSrc = "./Snowy.jpg";
         cityColor("#0A837F");
+        setLight(44000, 254, 254);
     }
     if(content.weather && (content.weather[0].id >= 700 && content.weather[0].id <= 799)){
         backgroundImageSrc = "./Misty.jpg";
         cityColor("#0A837F");
+        setLight(4500, 254, 190);
     }
     if(content.weather && content.weather[0].id === 800){
         backgroundImageSrc = "./Clear.jpg";
         cityColor("#FFBC11");
+        setLight(25000, 200, 150);
     }
     if(content.weather && (content.weather[0].id >= 800 && content.weather[0].id <= 803)){
         backgroundImageSrc = "./ScatteredClouds.jpg";
         cityColor("#FFBC11");
+        setLight(38000, 250, 150);
     }
     if(content.weather && (content.weather[0].id >= 804 && content.weather[0].id <= 810)){
         backgroundImageSrc = "./Cloudy.jpg";
         cityColor("#FFBC11");
+        setLight(10000, 254, 254);
     }
 
     return (
@@ -80,16 +104,12 @@ export default function App() {
                 </div>
             </form>
 
-            <h1 className="city">{content.name}</h1>
-            
-            <div className="weatherDetails">
-                <p className="weatherDetails__temp">{content.main?.temp}&#186;C</p>
-                <p className="weatherDetails__feelsLike">Feels like <span>{content.main?.feels_like}&#186;C</span></p>
-                <p className="weatherDetails__weather">{content.weather && content.weather[0].main} / {content.weather && content.weather[0].description}</p>
-            </div>
+            {/* {content ? <Result content={content} /> : } */}
 
-            <button className="unitsButton__metric" data-unit="metric" onClick={handleUnits}>Metric</button>
-            <button className="unitsButton__imperial" data-unit="imperial" onClick={handleUnits}>Imperial</button>
+            <div className="unitsButton">
+                <button className="unitsButton__metric" data-unit="metric" onClick={handleUnits}>&#186;C</button>
+                <button className="unitsButton__imperial" data-unit="imperial" onClick={handleUnits}>&#186;F</button>
+            </div>
         </main>
     );
 }
