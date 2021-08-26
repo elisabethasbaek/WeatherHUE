@@ -6,7 +6,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 10000;
+    -z-index: 10000;
     background-color: rgba(224,231,231, 0.5);
     display: grid;
     place-content: center;

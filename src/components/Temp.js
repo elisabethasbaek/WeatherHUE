@@ -1,4 +1,4 @@
-export default function Temp({temp}){
+export default function Temp({temp, clazz}){
     var chooseUnit;
 
     if(document.cookie.split("=")[1] === "metric"){
@@ -9,6 +9,6 @@ export default function Temp({temp}){
     }
 
     return(
-        <p className="weatherDetails__temp">{temp}&#186;{chooseUnit}</p>
+        <p className={clazz}>{temp}&#186;{chooseUnit}</p>
     )
 }

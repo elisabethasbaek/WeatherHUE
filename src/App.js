@@ -95,7 +95,10 @@ export default function App() {
         
     return (
         <main className="App">
-            <Overlay />
+            {document.cookie === "units=metric" || document.cookie === "units=imperial"
+            ? <Overlay hidden="-1000" /> 
+            : <Overlay hidden="1000" />}
+
             {content.length === 0
             ? <Month />
             : <img src={backgroundImageSrc} alt="Current weather conditions" className="backgroundImage"/>

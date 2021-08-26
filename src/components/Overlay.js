@@ -1,6 +1,6 @@
 import "../style/Overlay.scss";
 
-export default function Overlay(){
+export default function Overlay({hidden}){
     function handleUnits(event){
         var cookieName = "units";
         var cookieValue = event.target.dataset.unit;
@@ -12,9 +12,8 @@ export default function Overlay(){
         console.log(document.cookie);
     }
 
-
     return(
-        <div className="overlay">
+        <div className="overlay" style={{zIndex: hidden}}>
             <div className="overlay__text">
                 <h1 className="heading">Which units do you prefer?</h1>
                 <div>

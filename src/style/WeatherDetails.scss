@@ -11,6 +11,22 @@
     box-shadow: 2px 2px 5px RGBA(0, 44, 43, 0.2);
     color: $cold;
 
+    &__feelsLike{
+        display: flex;
+        padding: 0.3rem 0;
+        
+        .feelsLike{
+            margin: 0;
+            padding-right: 0.2rem;
+        }
+
+        .tempSmall{
+            font-weight: bold;
+            margin: 0;
+        }
+
+    }
+
     &__temp{
         text-align: end;
         font-size: 1.8rem;
@@ -19,18 +35,9 @@
         font-weight: bolder;
     }
 
-    &__feelsLike{
-        span{
-            font-weight: bold;
-        }
-    }
 
     &__weather{
         text-transform: capitalize;
-    }
-    
-    &__feelsLike,
-    &__weather{
         margin: 0;
         padding: 0.3rem 0;
     }
