@@ -11,6 +11,7 @@ import "./style/UnitsButtons.scss";
 import Result from "./pages/Result";
 import FrontPage from "./components/FrontPage";
 import Month from "./components/Month";
+import Overlay from "./components/Overlay";
 
 export default function App() {
     var [content, setContent] = useState([]);
@@ -94,6 +95,7 @@ export default function App() {
         
     return (
         <main className="App">
+            <Overlay />
             {content.length === 0
             ? <Month />
             : <img src={backgroundImageSrc} alt="Current weather conditions" className="backgroundImage"/>

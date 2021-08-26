@@ -1,0 +1,73 @@
+@import "../Variables.scss";
+
+.overlay{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    background-color: rgba(224,231,231, 0.5);
+    display: grid;
+    place-content: center;
+    
+    &__text{
+        box-shadow: 2px 2px 5px RGBA(0, 44, 43, 0.2);
+        border-radius: 10px;
+        border: 3px solid $lightCold;
+        margin: 0 1rem;
+        height: 70vh;
+        background-color: $coldBackground;
+        padding: 3rem 1rem;
+
+        .heading{
+            text-transform: uppercase;
+            font-size: 2.5rem;
+            line-height: 2.8rem;
+            margin: 0;
+            font-weight: bold;
+            color: $lightCold;
+            text-align: center;
+        }
+
+        div{
+            display: grid;
+            margin-top: 2rem;
+
+            .metric,
+            .imperial{
+                width: 50%;
+                justify-self: center;
+                border-left: 2px solid rgb(192, 201, 214);
+                border-top: 2px solid rgb(192, 201, 214);
+                border-bottom: 2px solid $lightCold;
+                border-right: 2px solid $lightCold;
+                border-radius: 3px;
+                margin: 1rem 0;
+                padding: 1rem 0;
+                background-color: transparent;
+                text-transform: uppercase;
+                box-shadow: 2px 2px 5px RGBA(0, 44, 43, 0.1);
+                font-weight: bold;
+                color: $cold;
+                font-size: 0.9rem;
+
+                &:active{
+                    border-right: 2px solid rgb(192, 201, 214);
+                    border-bottom: 2px solid rgb(192, 201, 214);
+                    border-top: 2px solid $lightCold;
+                    border-left: 2px solid $lightCold;
+                    box-shadow: 1px 1px 2px RGBA(0, 44, 43, 0.1);
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 350px){
+    .overlay{
+        &__text{
+            height: 90vh;
+        }
+    }
+}
