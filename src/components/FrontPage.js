@@ -32,7 +32,7 @@ export default function FrontPage({color}){
                 <p style={{color}}>city</p>
             </div>
             <h1 className="frontPage__subheader">Get the current weather</h1>
-            <p className="frontPage__description">Access present weather for over 200.000 cities around the world</p>
+            <p className="frontPage__description">Access present weather from over 200.000 cities around the world</p>
         </div>
     )
 }

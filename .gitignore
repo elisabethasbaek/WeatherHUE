@@ -8,6 +8,7 @@
 .eslintcache
 README.md
 .env
+.env.local
 
 # testing
 /coverage

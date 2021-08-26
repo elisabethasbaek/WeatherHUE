@@ -6,29 +6,20 @@ import "./style/Search.scss";
 import "./style/City.scss";
 import "./style/BackgroundImage.scss";
 import "./style/WeatherDetails.scss";
-import "./style/UnitsButtons.scss";
 
 import Result from "./pages/Result";
 import FrontPage from "./components/FrontPage";
 import Month from "./components/Month";
 import Overlay from "./components/Overlay";
+import UnitsButtons from "./components/UnitsButtons";
 
 export default function App() {
     var [content, setContent] = useState([]);
     var backgroundImageSrc;
     var cityColor;
+    var hours = new Date().getHours();
     
-    function handleUnits(event){
-        var cookieName = "units";
-        var cookieValue = event.target.dataset.unit;
-        var exdays = 30;
-        const date = new Date();
-        date.setTime(date.getTime()  + (exdays*24*60*60*1000));
-        var expires = "expires="+date.toUTCString();
-        document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
-        console.log(document.cookie);
-    }
-    
+    /* fetch for weather api: */
     function handleSubmit(event){
         event.preventDefault();
         
@@ -39,9 +30,10 @@ export default function App() {
         });
     }
 
+    /* fetch for philips hue: */
     const setLight = async (hue, sat, bri) => {
         try{
-            return await axios.put("https://192.168.8.100/api/0XBlGLtpVQGbYSpcweaVrbi7hNe1nGgkE5DENQ6I/lights/11/state", {
+            return await axios.put(`https://192.168.8.100/api/${process.env.REACT_APP_API_KEY}/lights/11/state`, {
                 hue: parseInt(hue),
                 sat: parseInt(sat),
                 bri: parseInt(bri)
@@ -78,14 +70,26 @@ export default function App() {
         setLight(4500, 254, 190);
     }
     if(content.weather && content.weather[0].id === 800){
-        backgroundImageSrc = "./Clear.jpg";
-        cityColor = "#FFBC11";
         setLight(25000, 200, 150);
+
+        if((hours >= 21 && hours <= 24) || (hours >= 0 && hours <= 5)){
+            backgroundImageSrc = "./ClearNight.jpg";
+            cityColor = "#0A837F";
+        }
+
+        if(hours >= 6 && hours <= 20){
+            backgroundImageSrc = "./Clear.jpg";
+            cityColor = "#FFBC11";
+        }
+        /* problem: den ved kun hvorvidt det er dag eller nat hvor brugeren
+        befinder sig, og ikke om det er dag eller nat ved den lokation
+        som brugeren har søgt efter */
     }
     if(content.weather && (content.weather[0].id >= 800 && content.weather[0].id <= 803)){
+        setLight(38000, 250, 150);
         backgroundImageSrc = "./ScatteredClouds.jpg";
         cityColor = "#FFBC11";
-        setLight(38000, 250, 150);
+
     }
     if(content.weather && (content.weather[0].id >= 804 && content.weather[0].id <= 810)){
         backgroundImageSrc = "./Cloudy.jpg";
@@ -95,15 +99,18 @@ export default function App() {
         
     return (
         <main className="App">
+            {/* cookie form overlay: */}
             {document.cookie === "units=metric" || document.cookie === "units=imperial"
             ? <Overlay hidden="-1000" /> 
             : <Overlay hidden="1000" />}
 
+            {/* background image: */}
             {content.length === 0
             ? <Month />
             : <img src={backgroundImageSrc} alt="Current weather conditions" className="backgroundImage"/>
             }
 
+            {/* search form: */}
             <form onSubmit={handleSubmit} className="search">
                 <label htmlFor="" className="search__label">Search for your city: </label>
                 <div className="search__input">
@@ -111,15 +118,14 @@ export default function App() {
                     <button type="submit" className="">Go</button>
                 </div>
             </form>
-
+            
+            {/* show front page or result of search: */}
             {content.length === 0
             ? <FrontPage />
             : <Result content={content} color={cityColor} />}
 
-            <div className="unitsButton">
-                <button className="unitsButton__metric" data-unit="metric" onClick={handleUnits}>&#186;C</button>
-                <button className="unitsButton__imperial" data-unit="imperial" onClick={handleUnits}>&#186;F</button>
-            </div>
+            {/* fahrenheit or celcius: */}
+            <UnitsButtons />
         </main>
     );
 }
