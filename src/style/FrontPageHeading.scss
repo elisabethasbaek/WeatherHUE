@@ -1,0 +1,30 @@
+@import "../Variables.scss";
+
+.frontPage{
+    color: $lightCold;
+    text-shadow: 2px 2px 5px RGBA(0, 44, 43, 0.2);
+    margin: 0 auto;
+    padding-top: 10vh;
+    
+    &__subheader{
+        text-align: center;
+        font-size: 1.4rem;
+        margin: 0 auto;
+    }
+    
+    &__header{
+        text-align: end;
+        text-transform: uppercase;
+        font-size: 3.5rem;
+        margin: 0 auto;
+        padding: 0 15vw;
+    }
+    
+    &__description{
+        width: 70vw;
+        text-align: end;
+        margin: 0 auto;
+        font-size: 0.8rem;
+        padding: 0 15vw;
+    }
+}

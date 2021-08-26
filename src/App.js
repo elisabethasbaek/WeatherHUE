@@ -8,6 +8,7 @@ import "./style/BackgroundImage.scss";
 import "./style/WeatherDetails.scss";
 import "./style/UnitsButtons.scss";
 import Result from "./pages/Result";
+import FrontPage from "./components/FrontPage";
 
 export default function App() {
     var [content, setContent] = useState([]);
@@ -47,10 +48,6 @@ export default function App() {
             console.log(err);
         }
     }
-
-    /* function cityColor(color){
-        document.querySelector(".city").style.color = color;
-    } */
 
     if(content.weather && (content.weather[0].id >= 200 && content.weather[0].id <= 299)){
         backgroundImageSrc = "./ThunderStorm.jpg";
@@ -95,7 +92,10 @@ export default function App() {
         
     return (
         <main className="App">
-            <img src={backgroundImageSrc} alt="" className="backgroundImage"/>
+            {content.length === 0
+            ? <img src="./FrontPage.jpg" alt="pretty weather" className="backgroundImage" />
+            : <img src={backgroundImageSrc} alt="pretty weather" className="backgroundImage"/>
+            }
 
             <form onSubmit={handleSubmit} className="search">
                 <label htmlFor="" className="search__label">Search for your city: </label>
@@ -106,7 +106,7 @@ export default function App() {
             </form>
 
             {content.length === 0
-            ? <h1>WHAZZUP BITCH</h1>
+            ? <FrontPage />
             : <Result content={content} color={cityColor} />}
 
             <div className="unitsButton">
