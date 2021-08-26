@@ -5,18 +5,22 @@ export default function FrontPage({color}){
 
     if(month === 2 || month === 3 || month === 4){
         color = "#E8B4C9";
+        /* spring */
     }
 
     if(month === 5 || month === 6 || month === 7){
         color = "#F4D801";
+        /* summer */
     }
 
     if(month === 8 || month === 9 || month === 10){
         color = "#F9A90C";
+        /* autumn */
     }
 
     if(month === 11 || month === 0 || month === 1){
         color = "#0A837F";
+        /* winter */
     }
 
     return(

@@ -96,7 +96,7 @@ export default function App() {
         <main className="App">
             {content.length === 0
             ? <Month />
-            : <img src={backgroundImageSrc} alt="pretty weather" className="backgroundImage"/>
+            : <img src={backgroundImageSrc} alt="Current weather conditions" className="backgroundImage"/>
             }
 
             <form onSubmit={handleSubmit} className="search">
