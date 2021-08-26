@@ -1,9 +1,9 @@
 import Units from "../components/Units";
 
-export default function Result({content}){
+export default function Result({content, color}){
     return(
         <>
-            <h1 className="city">{content.name}</h1>
+            <h1 className="city" style={{color: color}}>{content.name}</h1>
             
             <div className="weatherDetails">
                 <Units temp={content.main?.temp} />
