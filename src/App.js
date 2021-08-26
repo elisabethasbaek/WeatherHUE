@@ -7,8 +7,10 @@ import "./style/City.scss";
 import "./style/BackgroundImage.scss";
 import "./style/WeatherDetails.scss";
 import "./style/UnitsButtons.scss";
+
 import Result from "./pages/Result";
 import FrontPage from "./components/FrontPage";
+import Month from "./components/Month";
 
 export default function App() {
     var [content, setContent] = useState([]);
@@ -93,7 +95,7 @@ export default function App() {
     return (
         <main className="App">
             {content.length === 0
-            ? <img src="./FrontPage.jpg" alt="pretty weather" className="backgroundImage" />
+            ? <Month />
             : <img src={backgroundImageSrc} alt="pretty weather" className="backgroundImage"/>
             }
 

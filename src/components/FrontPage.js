@@ -1,11 +1,34 @@
 import "../style/FrontPageHeading.scss";
 
-export default function FrontPage(){
+export default function FrontPage({color}){
+    var month = new Date().getMonth();
+
+    if(month === 2 || month === 3 || month === 4){
+        color = "#E8B4C9";
+    }
+
+    if(month === 5 || month === 6 || month === 7){
+        color = "#F4D801";
+    }
+
+    if(month === 8 || month === 9 || month === 10){
+        color = "#F9A90C";
+    }
+
+    if(month === 11 || month === 0 || month === 1){
+        color = "#0A837F";
+    }
+
     return(
         <div className="frontPage">
-            <h2 className="frontPage__subheader">get the current weather</h2>
-            <h1 className="frontPage__header" >Search for your city</h1>
-            <p className="frontPage__description">Access current weather for over 200.000 cities around the world</p>
+            <div className="frontPage__header">
+                <p style={{color: color}}>Search</p>
+                <p style={{color}}>for</p>
+                <p style={{color}}>your</p>
+                <p style={{color}}>city</p>
+            </div>
+            <h1 className="frontPage__subheader">Get the current weather</h1>
+            <p className="frontPage__description">Access present weather for over 200.000 cities around the world</p>
         </div>
     )
 }
