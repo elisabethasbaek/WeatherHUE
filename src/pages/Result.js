@@ -1,6 +1,9 @@
 import Temp from "../components/Temp";
 
 export default function Result({content, color}){
+    /* console.log(content.timezone / 3600);
+    console.log(new Date().getUTCHours()); */
+
     return(
         <>
             <h1 className="city" style={{color: color}}>{content.name}</h1>

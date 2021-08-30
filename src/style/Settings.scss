@@ -1,0 +1,24 @@
+@import "../Variables.scss";
+
+.settings{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    width: 100vw;
+    height: 100vh;
+    background-color: $coldBackground;
+    padding: 3rem 1rem;
+
+    &__heading{
+        text-transform: uppercase;
+        font-size: 2.5rem;
+        line-height: 2.8rem;
+        margin: 0;
+        font-weight: bold;
+        color: $lightCold;
+        text-align: center;
+    }
+}

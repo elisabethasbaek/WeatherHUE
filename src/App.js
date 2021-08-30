@@ -8,10 +8,12 @@ import "./style/BackgroundImage.scss";
 import "./style/WeatherDetails.scss";
 
 import Result from "./pages/Result";
+import Settings from "./components/Settings";
 import FrontPage from "./components/FrontPage";
 import Month from "./components/Month";
 import Overlay from "./components/Overlay";
 import UnitsButtons from "./components/UnitsButtons";
+import SettingsButton from "./components/SettingsButton";
 
 export default function App() {
     var [content, setContent] = useState([]);
@@ -104,6 +106,9 @@ export default function App() {
             ? <Overlay hidden="-1000" /> 
             : <Overlay hidden="1000" />}
 
+            {/* settings: */}
+            <Settings />
+
             {/* background image: */}
             {content.length === 0
             ? <Month />
@@ -124,6 +129,8 @@ export default function App() {
             ? <FrontPage />
             : <Result content={content} color={cityColor} />}
 
+            {/* open settings: */}
+            <SettingsButton />
             {/* fahrenheit or celcius: */}
             <UnitsButtons />
         </main>
