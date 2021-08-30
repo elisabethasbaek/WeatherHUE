@@ -11,6 +11,19 @@
     height: 100vh;
     background-color: $coldBackground;
     padding: 3rem 1rem;
+    color: $darkCold;
+
+    &__close{
+        position: fixed;
+        top: 0;
+        left: 0;
+        border: none;
+        background-color: transparent;
+        padding: 1rem;
+        font-size: 1.5rem;
+        color: $cold;
+        text-shadow: 2px 2px 5px RGBA(0, 44, 43, 0.2);
+    }
 
     &__heading{
         text-transform: uppercase;
@@ -20,5 +33,18 @@
         font-weight: bold;
         color: $lightCold;
         text-align: center;
+        padding-top: 1rem;
+    }
+
+    &__anno{
+        position: fixed;
+        bottom: 0;
+        text-align: center;
+        width: 100%;
+        font-size: 0.7rem;
+
+        span{
+            font-size: 0.5rem;
+        }
     }
 }
