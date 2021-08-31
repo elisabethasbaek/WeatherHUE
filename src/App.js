@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import SettingsContext from "./SettingsContext";
+import UnitsContext from "./UnitsContext";
 
 import "./App.scss";
 import "./style/Search.scss";
@@ -14,8 +16,6 @@ import Month from "./components/Month";
 import Overlay from "./components/Overlay";
 import UnitsButtons from "./components/UnitsButtons";
 import SettingsButton from "./components/SettingsButton";
-import SettingsContext from "./SettingsContext";
-import UnitsContext from "./UnitsContext";
 
 export default function App() {
     var [content, setContent] = useState([]);
@@ -44,12 +44,13 @@ export default function App() {
     }
 
     var userInfo = JSON.parse(getCookie("UserInfo"));
+    var unitsCookie = getCookie("units");
     
     /* fetch for weather api: */
     function handleSubmit(event){
         event.preventDefault();
         
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${event.target.search.value}&units=${document.cookie.split("=")[1]}&appid=01ef0b0a8b733220771bbe668022c1b3`)
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${event.target.search.value}&units=${unitsCookie}&appid=01ef0b0a8b733220771bbe668022c1b3`)
         .then(function (response) {
             setContent(response.data);
             console.log(response.data);
