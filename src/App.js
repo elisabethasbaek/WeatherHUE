@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import SettingsContext from "./SettingsContext";
 import UnitsContext from "./UnitsContext";
@@ -13,14 +13,15 @@ import Result from "./pages/Result";
 import Settings from "./components/Settings";
 import FrontPage from "./components/FrontPage";
 import Month from "./components/Month";
-import Overlay from "./components/Overlay";
+/* import Overlay from "./components/Overlay"; */
 import UnitsButtons from "./components/UnitsButtons";
 import SettingsButton from "./components/SettingsButton";
 
 export default function App() {
     var [content, setContent] = useState([]);
     var [openClose, setOpenClose] = useState(false);
-    var [units, setUnits] = useState(false);
+    var [unitsCookie, setUnitsCookie] = useState([]);
+    var [userInfo, setUserInfo] = useState([]);
     var backgroundImageSrc;
     var cityColor;
     var hours = new Date().getHours();
@@ -40,11 +41,15 @@ export default function App() {
             }
         }
         return "";
-        /* function fundet på W3 */
     }
 
-    var userInfo = JSON.parse(getCookie("UserInfo"));
-    var unitsCookie = getCookie("units");
+    useEffect(function(){
+        setUnitsCookie(getCookie("units"))
+    }, [setUnitsCookie]);
+
+    useEffect(function(){
+        setUserInfo(JSON.parse(getCookie("UserInfo")))
+    }, [setUserInfo]);
     
     /* fetch for weather api: */
     function handleSubmit(event){
@@ -159,6 +164,7 @@ export default function App() {
 
                 {/* open settings: */}
                 <SettingsButton />
+                
                 {/* fahrenheit or celcius: */}
                 <UnitsButtons />
             </UnitsContext.Provider>

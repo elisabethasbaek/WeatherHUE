@@ -1,7 +1,11 @@
+import { useState, useEffect } from "react";
+
 export default function Result({content, color}){
+    var [unitsCookie, setUnitsCookie] = useState([]);
+    var chooseUnit;
+
     /* console.log(content.timezone / 3600);
     console.log(new Date().getUTCHours()); */
-    var chooseUnit;
 
     function getCookie(cname) {
         let name = cname + "=";
@@ -19,7 +23,10 @@ export default function Result({content, color}){
         }
         return "";
     }
-    var unitsCookie = getCookie("units");
+
+    useEffect(function(){
+        setUnitsCookie(getCookie("units"));
+    }, [setUnitsCookie]);
 
     if(unitsCookie === "metric"){
         chooseUnit = "C";
