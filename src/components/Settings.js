@@ -1,17 +1,25 @@
 import "../style/Settings.scss";
+import { useContext } from "react";
+import SettingsContext from "../SettingsContext";
 
-export default function Settings({hidden}){
-    function close(){
-        hidden = -1000;
-    }
+export default function Settings({input, username, light}){
+    var {openClose, setOpenClose} = useContext(SettingsContext);
 
-    function handleSubmit(){
-
+    function handleSubmit(event){
+        /* var cookieName;
+        var cookieValue = event.target.ip.value;
+        var exdays = 30;
+        const date = new Date();
+        date.setTime(date.getTime()  + (exdays*24*60*60*1000));
+        var expires = "expires="+date.toUTCString();
+        document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
+        console.log(document.cookie); */
     }
 
     return(
-        <div className="settings" style={{zIndex: hidden}}>
-            <button className="settings__close" onClick={close}><i className="fas fa-times"></i></button>
+        <>
+        <div className="settings">
+            <button className="settings__close" onClick={() => setOpenClose(!openClose)}><i className="fas fa-times"></i></button>
             <h1 className="settings__heading">Settings</h1>
 
             <form onSubmit={handleSubmit} className="settings__form">
@@ -26,14 +34,15 @@ export default function Settings({hidden}){
                 </div>
 
                 <div className="formPair">
-                    <label htmlFor=""></label>
-                    <input type="text" id="" placeholder=""></input>
+                    <label htmlFor="light">Your light's number:</label>
+                    <input type="text" id="light" placeholder="Light number"></input>
                 </div>
 
                 <button type="submit">Save</button>
             </form>
 
-            <p className="settings__anno"><span class="far fa-copyright"></span> 2021</p>
+            <p className="settings__anno"><span className="far fa-copyright"></span> 2021</p>
         </div>
+        </>
     )
 }

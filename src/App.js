@@ -14,9 +14,13 @@ import Month from "./components/Month";
 import Overlay from "./components/Overlay";
 import UnitsButtons from "./components/UnitsButtons";
 import SettingsButton from "./components/SettingsButton";
+import SettingsContext from "./SettingsContext";
+import UnitsContext from "./UnitsContext";
 
 export default function App() {
     var [content, setContent] = useState([]);
+    var [openClose, setOpenClose] = useState(false);
+    var [units, setUnits] = useState(false);
     var backgroundImageSrc;
     var cityColor;
     var hours = new Date().getHours();
@@ -101,38 +105,43 @@ export default function App() {
         
     return (
         <main className="App">
-            {/* cookie form overlay: */}
-            {document.cookie === "units=metric" || document.cookie === "units=imperial"
-            ? <Overlay hidden="-1000" /> 
-            : <Overlay hidden="1000" />}
+            <SettingsContext.Provider value={{openClose, setOpenClose}}>
+            <UnitsContext.Provider value={{openClose, setOpenClose}}>
+                
+                {/* cookie form overlay: */}
+                {/* {document.cookie === "units=metric" || document.cookie === "units=imperial"
+                ? <Overlay hidden="-1000" /> 
+                : <Overlay hidden="1000" />} */}
 
-            {/* settings: */}
-            <Settings />
+                {/* settings: */}
+                {openClose && <Settings />}
 
-            {/* background image: */}
-            {content.length === 0
-            ? <Month />
-            : <img src={backgroundImageSrc} alt="Current weather conditions" className="backgroundImage"/>
-            }
+                {/* background image: */}
+                {content.length === 0
+                ? <Month />
+                : <img src={backgroundImageSrc} alt="Current weather conditions" className="backgroundImage"/>
+                }
 
-            {/* search form: */}
-            <form onSubmit={handleSubmit} className="search">
-                <label htmlFor="" className="search__label">Search for your city: </label>
-                <div className="search__input">
-                    <input type="text" id="search" name="search" className=""></input>
-                    <button type="submit" className="">Go</button>
-                </div>
-            </form>
-            
-            {/* show front page or result of search: */}
-            {content.length === 0
-            ? <FrontPage />
-            : <Result content={content} color={cityColor} />}
+                {/* search form: */}
+                <form onSubmit={handleSubmit} className="search">
+                    <label htmlFor="" className="search__label">Search for your city: </label>
+                    <div className="search__input">
+                        <input type="text" id="search" name="search" className=""></input>
+                        <button type="submit" className="">Go</button>
+                    </div>
+                </form>
+                
+                {/* show front page or result of search: */}
+                {content.length === 0
+                ? <FrontPage />
+                : <Result content={content} color={cityColor} />}
 
-            {/* open settings: */}
-            <SettingsButton />
-            {/* fahrenheit or celcius: */}
-            <UnitsButtons />
+                {/* open settings: */}
+                <SettingsButton />
+                {/* fahrenheit or celcius: */}
+                <UnitsButtons />
+            </UnitsContext.Provider>
+            </SettingsContext.Provider>
         </main>
     );
 }

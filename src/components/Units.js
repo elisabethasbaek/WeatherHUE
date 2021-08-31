@@ -1,6 +1,6 @@
 import "../style/UnitsButtons.scss";
 
-export default function Units({temp}){
+export default function Units(){
     function handleUnits(event){
         var cookieName = "units";
         var cookieValue = event.target.dataset.unit;
