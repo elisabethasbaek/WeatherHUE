@@ -6,14 +6,16 @@ export default function Settings({input, username, light}){
     var {openClose, setOpenClose} = useContext(SettingsContext);
 
     function handleSubmit(event){
-        /* var cookieName;
-        var cookieValue = event.target.ip.value;
-        var exdays = 30;
+        var cookieValue = {
+            IPAddress: event.target.ip.value,
+            Username: event.target.username.value,
+            LightNumber: event.target.light.value
+        }
+        
         const date = new Date();
-        date.setTime(date.getTime()  + (exdays*24*60*60*1000));
-        var expires = "expires="+date.toUTCString();
-        document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
-        console.log(document.cookie); */
+        date.setTime(date.getTime() + (30*24*60*60*1000));
+        var expires = "expires=" + date.toUTCString();
+        document.cookie = "UserInfo=" + JSON.stringify(cookieValue) + ";" + expires + ";path=/";
     }
 
     return(

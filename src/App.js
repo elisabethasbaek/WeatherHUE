@@ -24,6 +24,26 @@ export default function App() {
     var backgroundImageSrc;
     var cityColor;
     var hours = new Date().getHours();
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+        /* function fundet på W3 */
+    }
+
+    var userInfo = JSON.parse(getCookie("UserInfo"));
     
     /* fetch for weather api: */
     function handleSubmit(event){
@@ -39,7 +59,7 @@ export default function App() {
     /* fetch for philips hue: */
     const setLight = async (hue, sat, bri) => {
         try{
-            return await axios.put(`https://192.168.8.100/api/${process.env.REACT_APP_API_KEY}/lights/11/state`, {
+            return await axios.put(`https://${userInfo.IPAddress}/api/${userInfo.Username}/lights/${userInfo.Light}/state`, {
                 hue: parseInt(hue),
                 sat: parseInt(sat),
                 bri: parseInt(bri)
